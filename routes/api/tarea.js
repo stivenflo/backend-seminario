@@ -34,9 +34,10 @@ router.get('/get_tarea', (req, res, next) => {
 
 //========API PARA INSERTAR DATOS DE TAREAS=======
 router.post('/insert_tarea', (req, res, next) => {
-    var query = 'INSERT INTO tarea (titulo, tarea) values (?, ?)';
+    var query = 'INSERT INTO tarea (titulo, tarea, limite) values (?, ?, ?)';
     var values = [req.body.titulo,
-                  req.body.tarea];
+                  req.body.tarea,
+                  req.body.limite];
 
     con.query(query, values, (err, result, field) => {
        if(err){
@@ -50,9 +51,10 @@ router.post('/insert_tarea', (req, res, next) => {
 
 //========API PARA MODIFICAR DATOS DE TAREAS======
 router.put('/update_tarea', (req, res, next) => {
-    var query = 'Update tarea set tarea=? WHERE titulo = ?';
+    var query = 'Update tarea set tarea=? limite=? WHERE titulo = ?';
     
     var values = [req.body.tarea,
+                  req.body.limite,
                   req.body.titulo];
 
     con.query(query, values, (err, result, field) => {
